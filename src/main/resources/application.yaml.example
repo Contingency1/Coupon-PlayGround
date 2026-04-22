@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: coupon-api
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+  # Database
+  datasource:
+    url: ${DB_URL}                        # ex) jdbc:mysql://localhost:3306/coupon_db
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate                  # 운영: validate, 개발: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  # Redis (선착순 쿠폰 동시성 처리용)
+  data:
+    redis:
+      host: ${REDIS_HOST}                 # ex) localhost
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}        # 없으면 빈 값
+
+# JWT
+jwt:
+  secret: ${JWT_SECRET}                   # 최소 256bit 이상의 랜덤 문자열
+  expiration-ms: 3600000                  # 1시간
+
+# 서버
+server:
+  port: 8080
